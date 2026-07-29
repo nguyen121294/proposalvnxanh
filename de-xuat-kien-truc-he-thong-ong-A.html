@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đề xuất Kiến trúc & Hệ thống – Nền tảng Nông sản Ông A</title>
+  <style>
+    :root {
+      --primary: #1b5e20;
+      --primary-light: #2e7d32;
+      --accent: #f9a825;
+      --bg: #f7f9f7;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #555;
+      --border: #e0e0e0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 40px 32px;
+      border-radius: 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 24px rgba(27, 94, 32, 0.25);
+    }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    header .subtitle { opacity: 0.9; font-size: 1rem; }
+    header .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.85; }
+    section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e8f5e9;
+    }
+    h3 {
+      font-size: 1.05rem;
+      color: var(--primary-light);
+      margin: 20px 0 10px;
+    }
+    p { margin-bottom: 12px; color: var(--muted); }
+    ul, ol { margin: 8px 0 16px 22px; color: var(--muted); }
+    li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #e8f5e9;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    tr:nth-child(even) { background: #fafcfa; }
+    .price {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .price-note {
+      font-size: 0.85rem;
+      color: #777;
+      font-weight: 400;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .badge-mvp { background: #e3f2fd; color: #1565c0; }
+    .badge-phase2 { background: #fff3e0; color: #e65100; }
+    .badge-phase3 { background: #f3e5f5; color: #6a1b9a; }
+    .highlight-box {
+      background: #e8f5e9;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+    .warning-box {
+      background: #fff8e1;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+    .total-box {
+      background: linear-gradient(135deg, #1b5e20, #2e7d32);
+      color: white;
+      padding: 20px 24px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    .total-box h3 { color: white; margin-top: 0; }
+    .arch-diagram {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.45;
+      color: #333;
+      margin: 14px 0;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: #888;
+      font-size: 0.88rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      header { padding: 28px 20px; }
+      section { padding: 20px 16px; }
+    }
+    code {
+      background: #f0f0f0;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>🌾 Đề xuất Kiến trúc & Hệ thống</h1>
+      <div class="subtitle">Nền tảng Catalog Nông sản – Truy xuất nguồn gốc – Kết nối Nhà vườn</div>
+      <div class="meta">
+        Dành cho Ông A &nbsp;|&nbsp; Ngày đề xuất: 28/07/2026<br />
+        Mục tiêu: Mở rộng mạng lưới nhà vườn · Giải phóng thời gian vận hành · Bảo vệ lợi nhuận
+      </div>
+    </header>
+
+    <section>
+      <h2>1. Mục tiêu cốt lõi</h2>
+      <ul>
+        <li><strong>Mở rộng mạng lưới nhà vườn</strong> nhanh – Ông A chỉ audit + duyệt, không phải tự đi kiếm nguồn.</li>
+        <li><strong>Release thời gian vận hành</strong> – Workflow rõ ràng, nhân viên cấp dưới làm được (thêm SP, điều chỉnh giá, chốt lô, xử lý đơn).</li>
+        <li><strong>Bảo vệ lợi nhuận</strong> – Giá mua theo lô, giá bán snapshot theo đơn, forecasting giá để tránh chốt giá cũ.</li>
+        <li><strong>Linh hoạt vai trò</strong> – Ông A có thể đóng vai trung gian hoặc chỉ kết nối (khách tự liên hệ nhà vườn).</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Pain point chính được giải quyết:</strong><br />
+        • Nhà vườn không update giá → nhân viên chốt giá cũ → hụt profit.<br />
+        • Ông A quá tải vận hành → không có thời gian mở rộng SKU & mạng lưới.<br />
+        • Muốn data-driven forecasting giá thay vì gọi điện hỏi từng ngày.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Kiến trúc tổng thể</h2>
+      <p>Xây dựng theo hướng <strong>Modular Monolith</strong> (dễ phát triển giai đoạn đầu), có thể tách microservice sau khi scale.</p>
+
+      <div class="arch-diagram">┌─────────────────────────────────────────────────────────┐
+│                    Frontend Apps                        │
+│  Public Catalog (khách) │ Supplier Portal │ Admin Panel │
+└──────────────┬──────────────────┬───────────┬───────────┘
+               │                  │           │
+┌──────────────▼──────────────────▼───────────▼───────────┐
+│                 API Gateway / Express Routes             │
+└──────────────┬──────────────────┬───────────┬───────────┘
+               │                  │           │
+    ┌──────────▼──────┐  ┌───────▼──────┐  ┌─▼────────────┐
+    │ Traceability    │  │ Marketplace  │  │ Inventory &  │
+    │ (lô, QR, timeline)│ │ (catalog, order)│ │ Pricing     │
+    └──────────┬──────┘  └───────┬──────┘  └─┬────────────┘
+               │                  │           │
+    ┌──────────▼──────────────────▼───────────▼───────────┐
+    │              Core Domain Services                    │
+    │  Supplier Mgmt │ Order Snapshot │ Price Forecast    │
+    │  Audit Workflow│ Lot Pricing    │ Dashboard Report  │
+    └─────────────────────────────────────────────────────┘</div>
+
+      <h3>Công nghệ đề xuất</h3>
+      <table>
+        <thead>
+          <tr><th>Lớp</th><th>Công nghệ</th><th>Ghi chú</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Backend</td><td>Node.js + Express</td><td>Tận dụng repo truy xuất hiện tại</td></tr>
+          <tr><td>Database</td><td>SQLite → PostgreSQL</td><td>Bắt đầu nhẹ, migrate khi scale</td></tr>
+          <tr><td>Frontend Admin / Nhà vườn</td><td>EJS + Bootstrap (giữ) / React</td><td>Mobile-first, dễ dùng trên điện thoại</td></tr>
+          <tr><td>Frontend Khách</td><td>Next.js hoặc EJS public</td><td>Catalog + đặt hàng mượt</td></tr>
+          <tr><td>Auth</td><td>Passport + JWT</td><td>Role: Admin, Staff, Supplier, Customer</td></tr>
+          <tr><td>Forecasting</td><td>JS thuần / Python microservice</td><td>Moving average → ML sau</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>3. Các module tính năng chính</h2>
+
+      <h3>A. Truy xuất nguồn gốc <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Lô (batch/lot) có mã lô chuẩn, QR code.</li>
+        <li>Timeline công đoạn + ảnh + chứng nhận (VietGAP, GlobalGAP…).</li>
+        <li>Trang truy xuất công khai (không cần đăng nhập).</li>
+        <li>Workflow: draft → pending audit → approved.</li>
+        <li>Audit log đầy đủ, soft delete.</li>
+      </ul>
+
+      <h3>B. Nhà vườn / Supplier Portal <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Đăng ký tài khoản + hồ sơ (MST, giấy phép, vùng trồng…).</li>
+        <li>Admin (Ông A) audit + duyệt.</li>
+        <li>Portal riêng: cập nhật giá hàng ngày, tồn kho, tạo lô mới.</li>
+        <li>Form cập nhật giá nhanh (mobile) → ghi thẳng DB + trigger forecast.</li>
+      </ul>
+
+      <h3>C. Catalog & Marketplace <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Catalog công khai: giá hiện tại, thông tin, nguồn gốc (link QR), tồn ước tính.</li>
+        <li>Nút “Đặt hàng” hoặc “Liên hệ nhà vườn” (chế độ trung gian / chỉ kết nối).</li>
+        <li>Admin dễ thêm/sửa sản phẩm, gắn nhiều lô, điều chỉnh giá bán.</li>
+      </ul>
+
+      <h3>D. Giá & Lợi nhuận <span class="badge badge-mvp">MVP</span> <span class="badge badge-phase2">Phase 2</span></h3>
+      <ul>
+        <li><strong>Giá mua theo lô</strong>: mỗi lô có giá nhập + ngày chốt.</li>
+        <li><strong>Giá bán snapshot</strong>: khi đặt hàng → lưu giá tại thời điểm đó vào đơn.</li>
+        <li>Tính lời/lỗ theo đơn + theo lô.</li>
+        <li><strong>Forecasting giá</strong> (Phase 2): gợi ý giá + cảnh báo lệch so với trung bình.</li>
+      </ul>
+
+      <h3>E. Tồn kho (Xuất – Nhập – Tồn) <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Tồn theo lô + theo sản phẩm tổng.</li>
+        <li>Nhập/xuất tự động khi duyệt đơn hoặc audit.</li>
+        <li>Cảnh báo tồn thấp.</li>
+      </ul>
+
+      <h3>F. Đơn hàng <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Tạo đơn (khách hoặc staff), snapshot giá + lô sử dụng.</li>
+        <li>Trạng thái: chờ xác nhận → đang giao → hoàn thành.</li>
+        <li>Chế độ “chỉ kết nối” hoặc “trung gian”.</li>
+      </ul>
+
+      <h3>G. Dashboard & Báo cáo <span class="badge badge-mvp">MVP</span></h3>
+      <ul>
+        <li>Theo ngày: doanh thu, lời/lỗ, số đơn, số lô mới, số nhà vườn active.</li>
+        <li>Báo cáo tồn, giá trung bình, top sản phẩm.</li>
+        <li>Export Excel / PDF.</li>
+      </ul>
+
+      <h3>H. Workflow & Phân quyền <span class="badge badge-phase2">Phase 2</span></h3>
+      <ul>
+        <li>Role-based permission chi tiết (staff chỉ sửa giá/tồn, không duyệt nhà vườn…).</li>
+        <li>Notification (email / Zalo / Telegram) khi có cập nhật giá, đơn mới, cần audit.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Đường dẫn Frontend App</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>Public (Khách hàng)</h3>
+          <ul>
+            <li><code>/</code> — Catalog trang chủ</li>
+            <li><code>/san-pham/:slug</code> — Chi tiết SP + nguồn gốc</li>
+            <li><code>/truy-xuat/:ma-lo</code> — Trang QR công khai</li>
+            <li><code>/dat-hang</code> — Form đặt hàng nhanh</li>
+            <li><code>/gio-hang</code> — Giỏ hàng (nếu cần)</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Supplier Portal (Nhà vườn)</h3>
+          <ul>
+            <li><code>/nha-vuon/dang-nhap</code></li>
+            <li><code>/nha-vuon/dashboard</code></li>
+            <li><code>/nha-vuon/lo-hang</code></li>
+            <li><code>/nha-vuon/cap-nhat-gia</code> ← quan trọng</li>
+            <li><code>/nha-vuon/ton-kho</code></li>
+            <li><code>/nha-vuon/don-hang</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Admin / Staff (Ông A + nhân viên)</h3>
+      <ul>
+        <li><code>/admin/dashboard</code> — Báo cáo ngày + KPI</li>
+        <li><code>/admin/nha-vuon</code> — Duyệt / audit nhà vườn</li>
+        <li><code>/admin/san-pham</code> — Quản lý catalog</li>
+        <li><code>/admin/lo-hang</code> — Quản lý lô + giá nhập</li>
+        <li><code>/admin/gia</code> — Điều chỉnh giá bán + forecast</li>
+        <li><code>/admin/don-hang</code> · <code>/admin/ton-kho</code> · <code>/admin/bao-cao</code></li>
+        <li><code>/admin/cai-dat</code> — Role, notification, chế độ trung gian/kết nối</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Lộ trình triển khai</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Nội dung chính</th>
+            <th>Thời gian ước tính</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-mvp">Phase 1 – MVP</span></td>
+            <td>Truy xuất nguồn gốc (mở rộng repo hiện tại) + Supplier đăng ký/audit + Catalog + Đặt hàng/Liên hệ + Giá theo lô + Snapshot giá đơn + Form cập nhật giá + Tồn kho cơ bản + Dashboard ngày</td>
+            <td>4–6 tuần</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-phase2">Phase 2</span></td>
+            <td>Forecasting giá cơ bản + Notification + Báo cáo lời/lỗ chi tiết + Phân quyền staff chi tiết + Export báo cáo</td>
+            <td>3–4 tuần</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-phase3">Phase 3</span></td>
+            <td>Chuyển PostgreSQL + Redis cache + PWA/Mobile cho nhà vườn + Tích hợp Zalo OA / thanh toán (nếu cần)</td>
+            <td>4–6 tuần</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>6. Source code đề xuất combine</h2>
+      <p>Base chính: <strong>github.com/tranha80/truy-xuat-nong-san</strong> (đã có lô, QR, audit, role nông dân/admin).</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>Mục đích combine</th>
+            <th>Độ ưu tiên</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Point-of-sale (Node + Express + EJS)</td>
+            <td>Cùng stack EJS, logic xuất nhập tồn + POS</td>
+            <td>★★★★★</td>
+          </tr>
+          <tr>
+            <td>iamtonmoy0 / node-express inventory</td>
+            <td>Logic tồn kho sạch, REST API</td>
+            <td>★★★★☆</td>
+          </tr>
+          <tr>
+            <td>spurtcommerce / spurtcommerce</td>
+            <td>Multi-vendor + vendor portal</td>
+            <td>★★★★☆</td>
+          </tr>
+          <tr>
+            <td>SojebSikder / nodejs-ecommerce</td>
+            <td>Multi-vendor Node thuần</td>
+            <td>★★★☆☆</td>
+          </tr>
+          <tr>
+            <td>medusajs / medusa</td>
+            <td>Commerce core dài hạn (inventory + order mạnh)</td>
+            <td>★★★☆☆ (Phase 3+)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>7. Đề xuất giá bán từng phần</h2>
+      <p>Đơn giá dưới đây mang tính tham khảo cho thị trường Việt Nam (freelance / team nhỏ), đã bao gồm phân tích, thiết kế, lập trình, test cơ bản và bàn giao. Chưa bao gồm hosting, domain, license thương mại (nếu có) và bảo trì dài hạn.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:5%">#</th>
+            <th style="width:32%">Hạng mục</th>
+            <th style="width:38%">Mô tả chi tiết</th>
+            <th style="width:25%">Đơn giá đề xuất</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Phân tích & Thiết kế hệ thống</strong></td>
+            <td>Thu thập yêu cầu chi tiết, user flow, wireframe, database schema, kiến trúc module</td>
+            <td class="price">8 – 12 triệu<br /><span class="price-note">1 lần</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Module Truy xuất nguồn gốc</strong></td>
+            <td>Mở rộng repo hiện tại: lô, QR, timeline, audit log, workflow duyệt, trang công khai</td>
+            <td class="price">15 – 22 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Module Nhà vườn (Supplier)</strong></td>
+            <td>Đăng ký, hồ sơ, portal cập nhật giá/tồn/lô, form mobile-friendly</td>
+            <td class="price">12 – 18 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Module Catalog & Marketplace</strong></td>
+            <td>Catalog công khai, chi tiết SP, đặt hàng / liên hệ, chế độ trung gian hoặc kết nối</td>
+            <td class="price">14 – 20 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Module Giá & Snapshot lợi nhuận</strong></td>
+            <td>Giá mua theo lô, giá bán snapshot theo đơn, tính lời/lỗ, form cập nhật giá realtime</td>
+            <td class="price">10 – 15 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Module Xuất – Nhập – Tồn</strong></td>
+            <td>Tồn theo lô + sản phẩm, nhập/xuất tự động, cảnh báo tồn thấp</td>
+            <td class="price">10 – 14 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Module Đơn hàng</strong></td>
+            <td>Tạo đơn, trạng thái, gắn lô + snapshot giá, chế độ trung gian/kết nối</td>
+            <td class="price">8 – 12 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Dashboard & Báo cáo ngày</strong></td>
+            <td>KPI ngày, lời/lỗ, tồn, top SP, export Excel/PDF cơ bản</td>
+            <td class="price">8 – 12 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Auth + Phân quyền cơ bản</strong></td>
+            <td>Đăng nhập, role Admin / Staff / Supplier, session/JWT</td>
+            <td class="price">5 – 8 triệu<br /><span class="price-note">MVP</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Forecasting giá (cơ bản)</strong></td>
+            <td>Moving average / regression đơn giản, cảnh báo lệch giá, gợi ý giá</td>
+            <td class="price">8 – 14 triệu<br /><span class="price-note">Phase 2</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Notification + Phân quyền nâng cao</strong></td>
+            <td>Email/Zalo/Telegram, permission chi tiết theo staff</td>
+            <td class="price">6 – 10 triệu<br /><span class="price-note">Phase 2</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Báo cáo nâng cao + Export</strong></td>
+            <td>Báo cáo lời/lỗ chi tiết theo lô/đơn/nhà vườn, biểu đồ</td>
+            <td class="price">5 – 8 triệu<br /><span class="price-note">Phase 2</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td><strong>Migrate PostgreSQL + Cache</strong></td>
+            <td>Chuyển DB, Redis cache giá & catalog</td>
+            <td class="price">6 – 10 triệu<br /><span class="price-note">Phase 3</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><strong>PWA / Mobile nhà vườn</strong></td>
+            <td>Progressive Web App hoặc React Native nhẹ cho form cập nhật giá</td>
+            <td class="price">12 – 20 triệu<br /><span class="price-note">Phase 3</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><strong>Tích hợp Zalo OA / Thanh toán</strong></td>
+            <td>Tùy chọn theo nhu cầu thực tế</td>
+            <td class="price">8 – 15 triệu<br /><span class="price-note">Phase 3 (tùy chọn)</span></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><strong>Deploy + Tài liệu + Training</strong></td>
+            <td>Deploy VPS/Render, hướng dẫn sử dụng, training Ông A + nhân viên</td>
+            <td class="price">4 – 7 triệu<br /><span class="price-note">Mỗi phase</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="total-box">
+        <h3>Tổng hợp giá theo Phase (tham khảo)</h3>
+        <table style="background: transparent; color: white; margin-top: 12px;">
+          <thead>
+            <tr>
+              <th style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3);">Phase</th>
+              <th style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3);">Phạm vi</th>
+              <th style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.3);">Giá đề xuất</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border-color: rgba(255,255,255,0.25);">Phase 1 – MVP</td>
+              <td style="border-color: rgba(255,255,255,0.25);">Hạng mục 1 → 9 + Deploy</td>
+              <td style="border-color: rgba(255,255,255,0.25); font-weight: 700;">90 – 140 triệu</td>
+            </tr>
+            <tr>
+              <td style="border-color: rgba(255,255,255,0.25);">Phase 2</td>
+              <td style="border-color: rgba(255,255,255,0.25);">Forecast + Notification + Báo cáo nâng cao</td>
+              <td style="border-color: rgba(255,255,255,0.25); font-weight: 700;">20 – 35 triệu</td>
+            </tr>
+            <tr>
+              <td style="border-color: rgba(255,255,255,0.25);">Phase 3</td>
+              <td style="border-color: rgba(255,255,255,0.25);">Scale DB + PWA + Tích hợp (tùy chọn)</td>
+              <td style="border-color: rgba(255,255,255,0.25); font-weight: 700;">25 – 45 triệu</td>
+            </tr>
+            <tr>
+              <td style="border-color: rgba(255,255,255,0.25); font-weight: 700;">Tổng toàn bộ</td>
+              <td style="border-color: rgba(255,255,255,0.25);">Phase 1 + 2 + 3</td>
+              <td style="border-color: rgba(255,255,255,0.25); font-weight: 700; font-size: 1.1rem;">135 – 220 triệu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning-box" style="margin-top: 20px;">
+        <strong>Ghi chú về giá:</strong><br />
+        • Giá có thể điều chỉnh theo phạm vi chốt cuối cùng và tiến độ thanh toán (ví dụ: 40% khi bắt đầu, 40% khi hoàn thành MVP, 20% sau bàn giao).<br />
+        • Nếu Ông A muốn làm gói trọn gói Phase 1 (MVP đủ dùng), có thể chốt khoảng <strong>95 – 125 triệu</strong> (đã tối ưu một số hạng mục).<br />
+        • Bảo trì sau bàn giao: đề xuất 8–12% giá trị dự án / năm hoặc theo giờ hỗ trợ.<br />
+        • License thương mại của repo truy xuất nguồn gốc (nếu dùng thương mại) cần liên hệ tác giả riêng.
+      </div>
+    </section>
+
+    <section>
+      <h2>8. Lợi ích mang lại cho Ông A</h2>
+      <div class="two-col">
+        <div class="highlight-box">
+          <strong>1. Systematic Workflow</strong><br />
+          Giải phóng thời gian vận hành, handover dễ cho nhân viên cấp dưới, Ông A tập trung push sales & mở rộng mạng lưới.
+        </div>
+        <div class="highlight-box">
+          <strong>2. Lợi nhuận & Scale</strong><br />
+          Thu hút thêm supplier nhanh + bảo vệ margin nhờ giá realtime + snapshot + forecast → hết cảnh “chốt giá cũ bị hụt”.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>9. Đề xuất bước tiếp theo</h2>
+      <ol>
+        <li>Chốt phạm vi Phase 1 (MVP) và ngân sách.</li>
+        <li>Làm rõ thêm: Ông A muốn chế độ <em>trung gian</em> hay <em>chỉ kết nối</em> là chính?</li>
+        <li>Xác nhận có cần thanh toán online / Zalo OA ngay từ Phase 1 hay để sau.</li>
+        <li>Ký thỏa thuận & bắt đầu phân tích chi tiết + wireframe.</li>
+      </ol>
+    </section>
+
+    <div class="footer">
+      Tài liệu đề xuất nội bộ · Không mang tính ràng buộc hợp đồng · Có thể điều chỉnh theo thảo luận với Ông A<br />
+      Ngày xuất: 28/07/2026
+    </div>
+
+  </div>
+</body>
+</html>

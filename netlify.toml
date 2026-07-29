@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/de-xuat-viet-nam-xanh.html"
+  status = 200

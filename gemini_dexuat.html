@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Xuất Giải Pháp Architecture & Hệ Thống Quản Lý Chuỗi Cung Ứng Nông Sản - Nền Tảng Ông A</title>
+    <style>
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --accent: #d97706;
+            --bg-main: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --warning: #ea580c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: #ffffff;
+            padding: 48px 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 800px;
+        }
+
+        .meta-bar {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            font-size: 17px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card p,
+        .card ul {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        .card ul li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-primary {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .price-text {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .total-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-box h3 {
+            color: #92400e;
+            font-size: 18px;
+        }
+
+        .total-price {
+            font-size: 26px;
+            font-weight: 800;
+            color: #b45309;
+        }
+
+        .tech-box {
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-x: auto;
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .footer {
+            background: #f1f5f9;
+            padding: 24px 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header,
+            .content {
+                padding: 24px 20px;
+            }
+
+            .meta-bar {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .total-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>BÁO CÁO ĐỀ XUẤT HỆ THỐNG & BÁO GIÁ KỸ THUẬT</h1>
+            <p>Hệ thống Chuỗi cung ứng, B2B Marketplace & Quản lý Giá Realtime Nông sản Trái cây (Dành cho Mô hình Kinh
+                doanh của Ông A)</p>
+
+            <div class="meta-bar">
+                <div class="meta-item">📌 <strong>Đối tượng:</strong> Doanh nghiệp Nông sản Ông A</div>
+                <div class="meta-item">🗓️ <strong>Ngày lập:</strong> 28/07/2026</div>
+                <div class="meta-item">🛠️ <strong>Đơn vị tư vấn:</strong> Chuyên gia Giải pháp Kiến trúc & Hệ thống
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- 1. Đánh giá & Định hướng -->
+            <div class="section">
+                <h2 class="section-title">1. Phân Tích Nỗi Đau Vận Hành & Chiến Lược Đề Xuất</h2>
+
+                <div class="highlight-box">
+                    <strong>Góc nhìn cốt lõi:</strong> Ông A đang gặp tình trạng <em>Overloaded Vận Hành (Đuối sức)</em>
+                    và <em>Thất thoát biên lợi nhuận (Margin Slip)</em> do biến động giá nông sản theo ngày/giờ. Mục
+                    tiêu lớn nhất của ông A không phải là làm thương mại điện tử đơn thuần, mà là <strong>Xây dựng Mạng
+                        lưới Nhà vườn (Supplier Network Expansion)</strong> để mở rộng SKUs mà không bị sa lầy vào khâu
+                    thu mua thủ công.
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. Tự động hóa Workflow Vận hành</h3>
+                        <ul>
+                            <li>Chuyển giao quyền báo giá cho hệ thống dựa trên thuật toán & dữ liệu thực tế.</li>
+                            <li>Tránh việc lính chốt đơn theo giá cũ gây lỗ hụt profit.</li>
+                            <li>Giảm 80% thời gian gọi điện chốt giá/sản lượng hàng ngày với nhà vườn.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>2. Mở rộng Mạng lưới Nhà vườn</h3>
+                        <ul>
+                            <li>Cung cấp Vendor Portal để nhà vườn tự đăng ký, khai báo sản lượng & cập nhật giá daily.
+                            </li>
+                            <li>Ông A chuyển từ vai trò "Đi tìm nguồn hàng" sang "Audit kiểm định chất lượng".</li>
+                            <li>Làm trung gian kết nối B2B (Cho phép khách mua trực tiếp hoặc mua qua bên ông A).</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>3. Chống thất thoát & Dự báo Giá</h3>
+                        <ul>
+                            <li>Mã hóa Lô hàng (Batch ID) để chốt đúng giá mua ($Cost/kg$) tại thời điểm nhập.</li>
+                            <li>Khóa giá bán realtime tại thời điểm chốt đơn.</li>
+                            <li>Gợi ý giá bán tối ưu (Data-driven Pricing) dựa trên dữ liệu lịch sử.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Kiến trúc Hệ thống -->
+            <div class="section">
+                <h2 class="section-title">2. Kiến Trúc Hệ Thống (System Architecture & Tech Stack)</h2>
+                <p style="margin-bottom: 16px; font-size: 14px;">Mô hình đề xuất theo dạng <strong>Modular Monolith /
+                        Hybrid Microservices</strong>, cho phép tận dụng Source Code GitHub có sẵn về Truy xuất nguồn
+                    gốc và tích hợp Core E-Commerce/Pricing mới.</p>
+
+                <div class="tech-box">
+                    [ CLIENT LAYER ]
+                    ├── Client App / Web Public ---> Browsing Catalog, Check Traceability QR, Checkout Order
+                    ├── Vendor Mobile Portal ---> Input Daily Price, Quantity & Register Batches
+                    └── Admin / Operations Portal ---> Audit Management, Price Control, Realtime PnL Dashboard
+
+                    [ API GATEWAY & APPLICATION LAYER ]
+                    ├── Core API Service (Node.js / Laravel)
+                    │ ├── Order & Price Lock Engine (Khóa giá thời điểm)
+                    │ ├── Batch & Inventory Management (Tồn kho theo Mã Lô)
+                    │ └── PnL Calculator Service (Tính Lời/Lỗ Realtime)
+                    │
+                    ├── Traceability Sub-system (Integration from GitHub: tranha80/truy-xuat-nong-san)
+                    │ ├── Vùng trồng & Nhật ký thu hoạch
+                    │ └── QR Code Generator & Trace Web View
+                    │
+                    └── Smart Pricing Engine (Python/Statistical Algorithm)
+                    └── Moving Average / Exponential Smoothing Forecast từ Data Nhà vườn input
+
+                    [ DATA LAYER ]
+                    ├── PostgreSQL Database (Transactional data, Batches, Orders, Price Logs)
+                    └── Redis Cache (Realtime price cache & Sessions)
+                </div>
+
+                <div class="highlight-box"
+                    style="background-color: #f0fdf4; border-left-color: #16a34a; margin-top: 20px;">
+                    <strong>Đánh giá repo `github.com/tranha80/truy-xuat-nong-san`:</strong><br>
+                    Repo này cung cấp nền tảng chuẩn về mã vùng trồng, quản lý cơ sở và nhật ký nông nghiệp. Giải pháp
+                    là **giữ repo này làm Service Truy xuất chuyên biệt (Core Traceability Service)**, sau đó viết API
+                    kết nối với Admin & Pricing Portal mới. Cách làm này vừa tiết kiệm 40% chi phí dev phần
+                    Traceability, vừa giúp hệ thống e-commerce linh hoạt không bị gò bó.
+                </div>
+            </div>
+
+            <!-- 3. Module Tính năng -->
+            <div class="section">
+                <h2 class="section-title">3. Các Module Tính Năng Chi Tiết</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Module</th>
+                            <th style="width: 45%;">Tính năng Chi tiết</th>
+                            <th style="width: 35%;">Giá trị Vận hành / Giải quyết Nỗi đau</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Batch & Traceability (Mã Lô & Truy xuất)</strong></td>
+                            <td>
+                                • Khai báo Lô hàng (Batch/Lot ID): Nhà vườn, Giá mua, Ngày nhập, Vùng trồng.<br>
+                                • Sinh mã QR cho từng lô hàng.<br>
+                                • Tích hợp source `tranha80/truy-xuat-nong-san`.
+                            </td>
+                            <td>Minh bạch nguồn gốc trái cây. Biết chính xác Lô nào nhập giá bao nhiêu để tính $COGS$.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Dynamic Pricing Engine (Cơ chế Giá & Lock Price)</strong></td>
+                            <td>
+                                • Khóa giá bán bán lẻ/B2B tại chính thời điểm chốt đơn.<br>
+                                • Quy tắc tính: $Giá Bán = Giá Mua Lô + Margin + Phí Vận Hành$.<br>
+                                • Phân quyền Override: Lính không thể tự chỉnh giá cũ.
+                            </td>
+                            <td>Chấm dứt việc nhân viên chốt sai giá cũ gây tụt biên lợi nhuận. Chửi lính ít đi 90%.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Vendor Portal (Self-service Nhà vườn)</strong></td>
+                            <td>
+                                • Giao diện tối ưu Mobile (PWA/Zalo OA/Web App).<br>
+                                • Form cập nhật Giá & Sản lượng hôm nay (chỉ 10 giây điền).<br>
+                                • Theo dõi lịch trình Audit & Đơn hàng thu mua.
+                            </td>
+                            <td>Nhà vườn tự chủ động báo giá. Ông A không cần gọi điện hỏi giá thủ công mỗi sáng.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Smart Price Forecast (Dự báo Giá Data-driven)</strong></td>
+                            <td>
+                                • Thu thập biến động giá history theo thời gian.<br>
+                                • Thuật toán dự báo chuỗi thời gian (ETS / Moving Average).<br>
+                                • Gợi ý dải giá mua/bán tối ưu cho ngày tiếp theo.
+                            </td>
+                            <td>Chủ động nắm bắt xu hướng thị trường, đưa ra giá cạnh tranh mà vẫn bảo vệ Margin.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Audit & Connection (Kiểm định & Sàn B2B)</strong></td>
+                            <td>
+                                • Workflow gửi hồ sơ -> Xếp lịch Audit -> Đạt chuẩn Verified.<br>
+                                • Option mua hàng: "Mua qua Ông A" hoặc "Liên hệ Nhà vườn".
+                            </td>
+                            <td>Chuyển dịch vai trò sang kiểm định chất lượng, mở rộng mạng lưới SKUs không giới hạn.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. Realtime PnL & Inventory Dashboard</strong></td>
+                            <td>
+                                • Báo cáo Doanh thu, Chi phí vốn ($COGS$), Lợi nhuận gộp theo Ngày/Lô.<br>
+                                • Quản lý tồn kho theo hạn sử dụng lô (FIFO/FEFO).
+                            </td>
+                            <td>Xem báo cáo tài chính realtime 24/7. Biết ngay hôm nay lời hay lỗ bao nhiêu tiền.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 4. Đường dẫn Frontend App -->
+            <div class="section">
+                <h2 class="section-title">4. Cấu Trúc Đường Dẫn Frontend App (Sitemap / URL Mapping)</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="badge badge-primary">Client Public Catalog</span>
+                        <h3 style="margin-top: 10px;">Giao diện Khách xem & Mua</h3>
+                        <ul>
+                            <li><code>/</code> : Trang chủ Catalog Trái cây</li>
+                            <li><code>/catalog</code> : Danh mục nông sản (Lọc VietGAP, Vùng miền)</li>
+                            <li><code>/product/[slug]</code> : Chi tiết sản phẩm & Giá thời điểm</li>
+                            <li><code>/trace/[lot_code]</code> : Web truy xuất nguồn gốc lô hàng</li>
+                            <li><code>/cart</code> & <code>/checkout</code> : Đặt hàng B2B / Lẻ</li>
+                            <li><code>/vendors</code> : Danh sách nhà vườn đã Audit</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="badge badge-warning">Vendor Mobile Portal</span>
+                        <h3 style="margin-top: 10px;">Dành cho Nhà vườn (Mobile First)</h3>
+                        <ul>
+                            <li><code>/vendor/login</code> : Đăng nhập OTP / SĐT</li>
+                            <li><code>/vendor/prices/update</code> : <strong>[Form Hot]</strong> Cập nhật giá & sản
+                                lượng hôm nay</li>
+                            <li><code>/vendor/batches/create</code> : Khai báo Lô hàng mới</li>
+                            <li><code>/vendor/audit-status</code> : Theo dõi trạng thái kiểm định</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <span class="badge badge-success">Admin Operations</span>
+                        <h3 style="margin-top: 10px;">Quản lý dành cho Ông A & Nhân viên</h3>
+                        <ul>
+                            <li><code>/admin/dashboard</code> : Báo cáo Doanh thu & Profit Realtime</li>
+                            <li><code>/admin/pricing-engine</code> : Điều chỉnh giá & Xem giá gợi ý AI</li>
+                            <li><code>/admin/batches</code> : Quản lý Lô hàng & Giá mua lô</li>
+                            <li><code>/admin/orders</code> : Quản lý đơn & Margin từng đơn</li>
+                            <li><code>/admin/vendors</code> : Duyệt & Lịch hẹn Audit nhà vườn</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Báo giá chi tiết -->
+            <div class="section">
+                <h2 class="section-title">5. Đề Xuất Báo Giá Chi Tiết Theo Module & Lộ Trình</h2>
+                <p style="margin-bottom: 16px; font-size: 14px;">Báo giá được xây dựng dựa trên mô hình triển khai theo
+                    3 Giai đoạn (Phases) giúp giảm thiểu rủi ro và đưa hệ thống vào vận hành sớm nhất.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Giai đoạn / Hạng mục</th>
+                            <th>Chi tiết Module & Công việc</th>
+                            <th>Thời gian</th>
+                            <th>Chi phí (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>PHASE 1: Core Base & Traceability</strong><br>
+                                <span class="badge badge-primary">MVP Launch</span>
+                            </td>
+                            <td>
+                                • Tích hợp & Tùy biến Source Code GitHub (`tranha80`).<br>
+                                • Thiết lập Quản lý Lô hàng (Batch ID) & Mã QR.<br>
+                                • Web Public Catalog & Chi tiết sản phẩm.<br>
+                                • Quản lý Tồn kho cơ bản theo Lô.
+                            </td>
+                            <td>3 - 4 Tuần</td>
+                            <td class="price-text">85.000.000 đ</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>PHASE 2: Price Engine & Vendor Portal</strong><br>
+                                <span class="badge badge-warning">Vận hành Tự động</span>
+                            </td>
+                            <td>
+                                • Mobile Vendor Portal (Form báo giá 10s cho Nhà vườn).<br>
+                                • Dynamic Pricing Engine (Khóa giá thời điểm, chống lệch giá).<br>
+                                • Module Quản lý Audit & Kết nối Sàn B2B.<br>
+                                • Luồng chốt đơn & Phân quyền nhân viên (RBAC).
+                            </td>
+                            <td>3 Tuần</td>
+                            <td class="price-text">65.000.000 đ</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>PHASE 3: Smart Forecasting & PnL Dashboard</strong><br>
+                                <span class="badge badge-success">Tối ưu Lợi Nhuận</span>
+                            </td>
+                            <td>
+                                • Algorithm Dự báo giá nông sản (Data-driven Pricing).<br>
+                                • Dashboard Báo cáo Doanh thu / Chi phí ($COGS$) / Lợi nhuận gộp Realtime.<br>
+                                • Cảnh báo hàng tồn kho & Hạn sử dụng Lô (FIFO/FEFO).
+                            </td>
+                            <td>2 - 3 Tuần</td>
+                            <td class="price-text">45.000.000 đ</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>HẠ TẦNG & CHUYỂN GIAO</strong><br>
+                                <span style="font-size: 12px; color: var(--text-muted);">Deployment & Training</span>
+                            </td>
+                            <td>
+                                • Khởi tạo Server Cloud (VPS/Docker/PostgreSQL).<br>
+                                • Hướng dẫn sử dụng, đào tạo nhân sự & Nhà vườn.<br>
+                                • Bảo hành kỹ thuật & Hỗ trợ vận hành 12 tháng.
+                            </td>
+                            <td>Song song</td>
+                            <td class="price-text">15.000.000 đ</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="total-box">
+                    <div>
+                        <h3>TỔNG CHÍ PHÍ DỰ TÍNH TRỌN GÓI</h3>
+                        <p style="font-size: 13px; color: #78350f; margin-top: 4px;">(Đã bao gồm tích hợp source GitHub,
+                            phát triển trọn gói 3 Phases & Bảo hành 1 năm)</p>
+                    </div>
+                    <div class="total-price">210.000.000 VNĐ</div>
+                </div>
+            </div>
+
+            <!-- 6. Lời khuyên chốt deal -->
+            <div class="section" style="margin-bottom: 0;">
+                <h2 class="section-title">6. Chiến Lược Pitching Proposal Với Ông A</h2>
+                <div class="card-grid">
+                    <div class="card" style="border-left: 4px solid var(--accent);">
+                        <h3>Nói về TIỀN (Lợi nhuận)</h3>
+                        <p>Nhấn mạnh: <em>"Hệ thống này giúp ông A giữ từng đồng biên lợi nhuận. Không còn cảnh lính
+                                chốt giá cũ làm mất tiền hụt profit nữa."</em></p>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--primary-light);">
+                        <h3>Nói về THỜI GIAN (Sức khỏe)</h3>
+                        <p>Nhấn mạnh: <em>"Giải phóng ông A khỏi việc nghe điện thoại chốt giá mỗi sáng. Giờ ông A chỉ
+                                đi audit chất lượng và mở rộng quy mô."</em></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Proposal & System Architecture Document. Generated for Internal Business Pitching.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

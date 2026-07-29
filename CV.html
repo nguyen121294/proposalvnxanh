@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nguyen Hoang Son | Systems Architect & Operations Optimization Consultant - Cố vấn tối ưu vận hành & Kiến trúc sư hệ thống. Experienced in deploying TMS, VRP modules and industrial AI solutions for Panasonic, GreenFeed, and GHTK.">
+    <meta property="og:title" content="Nguyen Hoang Son | Systems Architect & Operations Optimization Consultant">
+    <meta property="og:description" content="Operations optimization consultant and systems architect. Specialized in designing custom TMS systems, vehicle routing (VRP) algorithms, and deploying industrial AI solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./Gemini_Generated_Image_lfxgyelfxgyelfxg.jfif">
+    <title>Nguyen Hoang Son | Systems Architect & Operations Optimization Consultant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS Styles -->
+    <style>
+        /* Language display toggles */
+        html[lang="vi"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-vi { display: none !important; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F4F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A6192E;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #801020;
+        }
+    </style>
+
+    <!-- Custom Tailwind Configuration in v4 style (Tailwind v3 Play CDN compatible setup) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        swiss: {
+                            bg: '#F5F4F0',
+                            text: '#1C1C1C',
+                            muted: '#5C5B57',
+                            border: '#E2DFD9',
+                            red: '#A6192E',
+                            accent: '#1E3E2F' // Deep pine green
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-swiss-bg text-swiss-text font-body antialiased min-h-screen flex flex-col selection:bg-swiss-red selection:text-white">
+
+    <!-- TOP MINIMAL HEADER & LANGUAGE TOGGLE -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-8 md:py-12 flex justify-between items-baseline border-b border-swiss-border">
+        <div>
+            <a href="#" class="font-mono text-xs font-bold tracking-widest text-swiss-red uppercase">// RESUME INDEX 2026</a>
+        </div>
+        
+        <!-- BILINGUAL SWITCHER -->
+        <div class="flex items-center gap-4 font-mono text-xs font-bold">
+            <button id="btn-lang-vi" onclick="setLanguage('vi')" class="transition-colors duration-150 text-swiss-red cursor-pointer">
+                VIÊT NAM
+            </button>
+            <span class="text-swiss-border font-light">|</span>
+            <button id="btn-lang-en" onclick="setLanguage('en')" class="transition-colors duration-150 text-swiss-muted hover:text-swiss-text cursor-pointer">
+                ENGLISH
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN GRID LAYOUT -->
+    <div class="flex-grow max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0">
+        
+        <!-- LEFT PANEL: BIO, PHOTO, STATS & CONTACT -->
+        <aside class="lg:col-span-4 p-6 md:p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-swiss-border flex flex-col gap-10 lg:sticky lg:top-0 lg:h-[calc(100vh-80px)] overflow-y-auto">
+            
+            <!-- PORTRAIT & IDENTITY -->
+            <div class="flex flex-col gap-6">
+                <!-- Grayscale portrait with fine frame -->
+                <div class="w-full max-w-[240px] mx-auto lg:mx-0 border border-swiss-border p-2 bg-white shadow-sm transition-transform duration-300">
+                    <img src="./Gemini_Generated_Image_lfxgyelfxgyelfxg.jfif" alt="Nguyen Hoang Son" class="w-full h-auto object-cover">
+                </div>
+
+                <div class="text-center lg:text-left mt-2">
+                    <h1 class="font-display text-4xl md:text-5xl font-medium tracking-tight leading-none text-swiss-text">
+                        Nguyen <br><span class="italic text-swiss-red">Hoang Son</span>
+                    </h1>
+                    
+                    <p class="font-mono text-[10px] text-swiss-muted tracking-widest uppercase mt-4">
+                        <span class="lang-vi">// CỐ VẤN TỐI ƯU & KIẾN TRÚC SƯ HỆ THỐNG</span>
+                        <span class="lang-en">// SYSTEMS & OPERATIONS OPTIMIZATION ARCHITECT</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- EXECUTIVE STATEMENT -->
+            <div class="border-t border-swiss-border pt-8">
+                <h3 class="font-mono text-[11px] text-swiss-muted font-bold tracking-wider mb-3 uppercase">
+                    <span class="lang-vi">// Giới thiệu</span>
+                    <span class="lang-en">// Profile</span>
+                </h3>
+                <p class="text-sm text-swiss-muted leading-relaxed text-justify">
+                    <span class="lang-vi">
+                        Cố vấn tối ưu hóa quy trình vận hành và kiến trúc sư hệ thống. Chuyên môn sâu sắc trong thiết lập cấu trúc TMS, lập mô hình tối ưu hóa định tuyến tự động (VRP) và ứng dụng công nghệ trí tuệ nhân tạo (AI) vào công nghiệp. Nền tảng chuyên ngành Kỹ thuật Hệ thống, kinh nghiệm SAP/ERP cùng năng lực xây dựng giải pháp mô hình hóa thực chiến qua hơn 200+ dự án.
+                    </span>
+                    <span class="lang-en">
+                        Operations optimization advisor and systems architect. Specialized in structuring logistics TMS, modeling automated routing (VRP) algorithms, and deploying industrial Artificial Intelligence (AI) solutions. Combines systems engineering theory, ERP/SAP integration experience, and robust operations modeling across 200+ enterprise projects.
+                    </span>
+                </p>
+            </div>
+
+            <!-- CONTACT SECTION -->
+            <div class="flex flex-col gap-3 font-mono text-xs border-t border-swiss-border pt-8">
+                <a href="mailto:sonnh@iesupplychain.com" class="flex items-center gap-3 py-1 text-swiss-muted hover:text-swiss-red transition-colors duration-150">
+                    <i class="fas fa-envelope text-swiss-red w-4"></i>
+                    <span>sonnh@iesupplychain.com</span>
+                </a>
+                <a href="tel:0834552286" class="flex items-center gap-3 py-1 text-swiss-muted hover:text-swiss-red transition-colors duration-150">
+                    <i class="fas fa-phone text-swiss-red w-4"></i>
+                    <span>0834 552 286</span>
+                </a>
+                <div class="flex items-center gap-3 py-1 text-swiss-muted">
+                    <i class="fas fa-map-marker-alt text-swiss-red w-4"></i>
+                    <span>Ho Chi Minh City, Vietnam</span>
+                </div>
+            </div>
+
+            <!-- DIGITAL HUBS -->
+            <div class="flex flex-col gap-2.5 border-t border-swiss-border pt-8">
+                <h3 class="font-mono text-[11px] text-swiss-muted font-bold tracking-wider mb-2 uppercase">
+                    <span class="lang-vi">// Dự án hoạt động</span>
+                    <span class="lang-en">// Active Projects</span>
+                </h3>
+                <div class="flex flex-col gap-2 font-mono text-xs">
+                    <a href="https://leantoolbox.app" target="_blank" class="flex justify-between items-center py-2 px-3 bg-white border border-swiss-border hover:border-swiss-red transition-all duration-150">
+                        <span>leantoolbox.app</span>
+                        <i class="fas fa-arrow-right text-swiss-red text-[10px]"></i>
+                    </a>
+                    <a href="https://taotinbds.netlify.app" target="_blank" class="flex justify-between items-center py-2 px-3 bg-white border border-swiss-border hover:border-swiss-red transition-all duration-150">
+                        <span>taotinbds.netlify.app</span>
+                        <i class="fas fa-arrow-right text-swiss-red text-[10px]"></i>
+                    </a>
+                    <a href="https://learn.iesupplychain.com" target="_blank" class="flex justify-between items-center py-2 px-3 bg-white border border-swiss-border hover:border-swiss-red transition-all duration-150">
+                        <span>learn.iesupplychain.com</span>
+                        <i class="fas fa-arrow-right text-swiss-red text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- RIGHT PANEL: CONTENT & TIMELINE -->
+        <main class="lg:col-span-8 p-6 md:p-8 lg:p-12 flex flex-col gap-14">
+
+            <!-- CORE NUMERICAL METRICS (Clean Editorial Rows) -->
+            <section id="metrics" class="border border-swiss-border bg-white p-8">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-6">
+                    
+                    <!-- Stat 1 -->
+                    <div class="flex flex-col border-r border-swiss-border last:border-0 pr-4 md:border-r">
+                        <span class="font-display text-4xl md:text-5xl font-medium text-swiss-red">8+</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// EXPERTISE YEARS</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Tối ưu vận hành kho vận & báo cáo</span>
+                            <span class="lang-en">Logistics optimization & reporting</span>
+                        </span>
+                    </div>
+
+                    <!-- Stat 2 -->
+                    <div class="flex flex-col md:border-r border-swiss-border pr-4 md:last:border-0">
+                        <span class="font-display text-4xl md:text-5xl font-medium text-swiss-red">200+</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// CONSULTING DELIVERIES</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Dự án cố vấn hệ thống & mô hình hóa</span>
+                            <span class="lang-en">Systems modeling & consulting deliveries</span>
+                        </span>
+                    </div>
+
+                    <!-- Stat 3 -->
+                    <div class="flex flex-col col-span-2 md:col-span-1 pr-4">
+                        <span class="font-display text-4xl md:text-5xl font-medium text-swiss-red">5</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// ACADEMIC PAPERS</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Bài báo nghiên cứu quốc tế</span>
+                            <span class="lang-en">Int'l journal & conference publications</span>
+                        </span>
+                    </div>
+
+                    <!-- Stat 4 -->
+                    <div class="flex flex-col border-r border-swiss-border last:border-0 pr-4 md:border-r pt-4 border-t border-swiss-border/60">
+                        <span class="font-display text-3xl font-medium text-swiss-red">Cu Chi</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// OPERATION SCALE</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Điều hành tổng kho lớn thứ 2 cả nước</span>
+                            <span class="lang-en">Manager of VN's 2nd largest hub</span>
+                        </span>
+                    </div>
+
+                    <!-- Stat 5 -->
+                    <div class="flex flex-col md:border-r border-swiss-border pr-4 md:last:border-0 pt-4 border-t border-swiss-border/60">
+                        <span class="font-display text-4xl md:text-5xl font-medium text-swiss-red">5+</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// ENTERPRISE CLIENTS</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Panasonic, Greenfeed, ABInbev...</span>
+                            <span class="lang-en">Panasonic, Greenfeed, ABInbev...</span>
+                        </span>
+                    </div>
+
+                    <!-- Stat 6 -->
+                    <div class="flex flex-col col-span-2 md:col-span-1 pr-4 pt-4 border-t border-swiss-border/60">
+                        <span class="font-display text-4xl md:text-5xl font-medium text-swiss-red">70%</span>
+                        <span class="font-mono text-[10px] text-swiss-muted uppercase tracking-wider mt-2">// PROCESS AUTOMATION</span>
+                        <span class="text-xs text-swiss-text mt-1.5 leading-snug">
+                            <span class="lang-vi">Quy trình tự động hóa bằng AI</span>
+                            <span class="lang-en">Processes automated via AI technology</span>
+                        </span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ACADEMIC & TECHNICAL CONSULTING SHOWCASE -->
+            <section class="flex flex-col gap-4 border-l-2 border-swiss-red pl-6 py-2">
+                <h2 class="font-display text-2xl font-semibold text-swiss-text">
+                    <span class="lang-vi">Cố Vấn Hệ Thống & Nghiên Cứu Đa Ngành</span>
+                    <span class="lang-en">Multi-Disciplinary Systems Advisory</span>
+                </h2>
+                <p class="text-sm text-swiss-muted leading-relaxed text-justify">
+                    <span class="lang-vi">
+                        <strong>Kinh nghiệm thực tế:</strong> Từ năm 2016 đến 2023, trực tiếp tư vấn thiết kế giải thuật tối ưu, mô hình hóa toán học và cố vấn hệ thống cho <strong>hơn 200 đề tài nghiên cứu & dự án kỹ thuật công nghiệp</strong>. Hành trình này đã rèn luyện nền tảng kiến thức đa ngành cực kỳ phong phú trong logistics, vận hành chuỗi cung ứng, lập mô hình mô phỏng hệ thống giao thông và kho bãi phức tạp. Nhờ đó, tôi có năng lực nhanh chóng nắm bắt nghiệp vụ đặc thù của mọi doanh nghiệp và đề xuất các ràng buộc logic tối ưu hóa sát thực tế nhất.
+                    </span>
+                    <span class="lang-en">
+                        <strong>Practical Experience:</strong> From 2016 to 2023, structured mathematical optimization models, designed custom algorithms, and served as systems advisor for <strong>over 200 research & industrial projects</strong>. This high-intensity consulting journey built a deep multi-disciplinary expertise in logistics networks, supply chain design, and complex simulation modeling for transport and warehousing systems, facilitating rapid business scoping.
+                    </span>
+                </p>
+                <div class="flex flex-wrap gap-2 pt-2 font-mono text-[10px] font-bold text-swiss-muted">
+                    <span class="px-2 py-1 bg-white border border-swiss-border">Mathematical Optimization</span>
+                    <span class="px-2 py-1 bg-white border border-swiss-border">Discrete Event Simulation</span>
+                    <span class="px-2 py-1 bg-white border border-swiss-border">VRP Constraint Modeling</span>
+                    <span class="px-2 py-1 bg-white border border-swiss-border">SAP/ERP Integrations</span>
+                    <span class="px-2 py-1 bg-white border border-swiss-border">Logistics Network Design</span>
+                </div>
+            </section>
+
+            <!-- WORK HISTORY TIMELINE -->
+            <section id="experience" class="flex flex-col gap-6">
+                <div class="border-b border-swiss-border pb-3 flex justify-between items-baseline">
+                    <h2 class="font-display text-2xl font-bold uppercase text-swiss-text tracking-tight">
+                        <span class="lang-vi">Lịch sử Vận hành & Cố vấn</span>
+                        <span class="lang-en">Professional Journey</span>
+                    </h2>
+                    <span class="font-mono text-xs text-swiss-muted">[EXP_TIMELINE]</span>
+                </div>
+
+                <div class="relative pl-6 border-l border-swiss-border flex flex-col gap-8 mt-4">
+                    
+                    <!-- Item 1: Entrepreneurship -->
+                    <div class="relative">
+                        <!-- Dot marker -->
+                        <div class="absolute left-[-29px] top-1.5 w-2.5 h-2.5 bg-swiss-red rounded-full"></div>
+                        
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 mb-2 font-mono text-xs">
+                            <span class="text-swiss-red font-bold">09/2023 — Present</span>
+                            <span class="text-swiss-muted font-medium uppercase">Self-Employed / Founder</span>
+                        </div>
+                        
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-display text-xl font-medium text-swiss-text">Operations & Technology Director</h3>
+                            <p class="text-sm text-swiss-muted leading-relaxed">
+                                <span class="lang-vi">
+                                    Ứng dụng trí tuệ nhân tạo (AI) tối ưu hóa vận hành và cố vấn thiết kế hệ thống số hóa.
+                                </span>
+                                <span class="lang-en">
+                                    Applying Artificial Intelligence (AI) to operations optimization and advising on digital systems architecture.
+                                </span>
+                            </p>
+                            <ul class="text-xs text-swiss-muted space-y-1.5 list-none pl-0 mt-2">
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi"><strong>leantoolbox.app:</strong> Nhà sáng lập giải pháp số hóa bộ công cụ LEAN (VSM, Kaizen, 5S) hỗ trợ quản lý sản xuất công nghiệp tại Việt Nam.</span>
+                                    <span class="lang-en"><strong>leantoolbox.app:</strong> Founder and architect of the digital solutions suite for LEAN operations (VSM, Kaizen, 5S) in Vietnamese industrial facilities.</span>
+                                </li>
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi"><strong>learn.iesupplychain.com:</strong> Quản lý phát triển nền tảng học tập tương tác và mô phỏng số Chuỗi cung ứng.</span>
+                                    <span class="lang-en"><strong>learn.iesupplychain.com:</strong> Director of development for the interactive educational supply chain simulator.</span>
+                                </li>
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi"><strong>taotinbds.netlify.app:</strong> Quản lý thiết kế hệ thống ứng dụng mô hình AI xử lý tự động hóa nội dung và hình ảnh bất động sản.</span>
+                                    <span class="lang-en"><strong>taotinbds.netlify.app:</strong> Designed AI-powered automation solutions for real estate content generation and image processing.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Smartlog -->
+                    <div class="relative">
+                        <div class="absolute left-[-29px] top-1.5 w-2.5 h-2.5 bg-swiss-red rounded-full"></div>
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 mb-2 font-mono text-xs">
+                            <span class="text-swiss-red font-bold">04/2022 — 09/2023</span>
+                            <span class="text-swiss-muted font-medium uppercase">Smartlog Co., Ltd.</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-display text-xl font-medium text-swiss-text">Systems Design & Implementation Lead (VRP)</h3>
+                            <h4 class="font-mono text-xs text-swiss-muted uppercase tracking-wider font-semibold">Project Manager | Routing Algorithms Specialist</h4>
+                            <p class="text-sm text-swiss-muted leading-relaxed">
+                                <span class="lang-vi">
+                                    Thiết kế giải pháp và triển khai module tối ưu hóa tuyến đường tự động (Vehicle Routing Problem - VRP) cho các đối tác quy mô lớn:
+                                </span>
+                                <span class="lang-en">
+                                    Led functional design and deployment of automated routing (VRP) solutions for enterprise logistics operations:
+                                </span>
+                            </p>
+                            <ul class="text-xs text-swiss-muted space-y-1.5 list-none pl-0 mt-1">
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi">Chủ nhiệm triển khai hệ thống TMS cho **GreenFeed**, tích hợp giải thuật VRP tự động xếp xe và tối ưu hóa tải trọng.</span>
+                                    <span class="lang-en">Led the implementation of the enterprise TMS for **GreenFeed**, integrating route planning (VRP) to optimize vehicle dispatch.</span>
+                                </li>
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi">Xây dựng mô hình điều phối tự động (VRP) đáp ứng các ràng buộc vận hành phức tạp của **Panasonic Việt Nam**, **ABInbev** và **Deliveree**.</span>
+                                    <span class="lang-en">Structured custom routing models to resolve complex operational constraints for **Panasonic Vietnam**, **ABInbev**, and **Deliveree**.</span>
+                                </li>
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi">Thiết kế giải pháp tối ưu hóa luồng phân phối DMS cho **Satraco**.</span>
+                                    <span class="lang-en">Designed distribution flow optimization modules for **Satraco** DMS.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: GHTK -->
+                    <div class="relative">
+                        <div class="absolute left-[-29px] top-1.5 w-2.5 h-2.5 bg-swiss-red rounded-full"></div>
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 mb-2 font-mono text-xs">
+                            <span class="text-swiss-red font-bold">09/2020 — 04/2022</span>
+                            <span class="text-swiss-muted font-medium uppercase">Giao Hang Tiet Kiem (GHTK)</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-display text-xl font-medium text-swiss-text">Cu Chi Inter-region Hub Director</h3>
+                            <h4 class="font-mono text-xs text-swiss-muted uppercase tracking-wider font-semibold">Optimization Specialist | Member of Operations Board</h4>
+                            <ul class="text-xs text-swiss-muted space-y-1.5 list-none pl-0 mt-2">
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi"><strong>Quản lý Vận hành (2022):</strong> Điều hành trực tiếp **Tổng kho Liên Vùng Củ Chi** (tổng kho lớn nhất miền Nam, lớn thứ 2 toàn quốc). Quy chuẩn hóa quy trình phân loại hàng hóa, tối ưu năng suất lao động và điều phối đội xe vận chuyển liên tỉnh Bắc - Nam.</span>
+                                    <span class="lang-en"><strong>Operations Lead (2022):</strong> Directed operations at the **Cu Chi Inter-region Sortation Hub** (largest in South, 2nd nationwide). Standardized sorting workflows, optimized labor productivity, and managed regional fleet dispatch.</span>
+                                </li>
+                                <li class="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-swiss-red">
+                                    <span class="lang-vi"><strong>Chuyên viên Tối ưu (2021):</strong> Thiết kế cấu trúc tuyến giao nhận, phân chia lại luồng hàng tại trung tâm khai thác HCM giúp rút ngắn thời gian xử lý và giảm tải ùn ứ hàng hóa.</span>
+                                    <span class="lang-en"><strong>Optimization Specialist (2021):</strong> Structured metropolitan transit hubs, optimized local sort lanes, and reduced transit bottlenecks.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Kim Dang -->
+                    <div class="relative">
+                        <div class="absolute left-[-29px] top-1.5 w-2.5 h-2.5 bg-swiss-red rounded-full"></div>
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 mb-2 font-mono text-xs">
+                            <span class="text-swiss-red font-bold">03/2020 — 09/2020</span>
+                            <span class="text-swiss-muted font-medium uppercase">Kim Dang Consulting</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-display text-xl font-medium text-swiss-text">LEAN Operations Consultant</h3>
+                            <h4 class="font-mono text-xs text-swiss-muted uppercase tracking-wider font-semibold">ILO Better Work Initiative</h4>
+                            <p class="text-sm text-swiss-muted leading-relaxed">
+                                <span class="lang-vi">
+                                    Tư vấn và đào tạo thực hành Kaizen, sơ đồ chuỗi giá trị (VSM), Kanban, 5S giúp nâng cao năng suất cho các đối tác nhà máy thuộc dự án GEAR hợp tác với Better Work.
+                                </span>
+                                <span class="lang-en">
+                                    Coached manufacturing plants in Kaizen, Value Stream Mapping (VSM), and 5S workflows to eliminate waste and optimize assembly processes under the GEAR program.
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Academic Technology Transfer -->
+                    <div class="relative">
+                        <div class="absolute left-[-29px] top-1.5 w-2.5 h-2.5 bg-swiss-red rounded-full"></div>
+                        <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 mb-2 font-mono text-xs">
+                            <span class="text-swiss-red font-bold">10/2016 — 03/2020</span>
+                            <span class="text-swiss-muted font-medium uppercase">VNU International University (IU)</span>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h3 class="font-display text-xl font-medium text-swiss-text">Academic Lecturer & Operations Researcher</h3>
+                            <h4 class="font-mono text-xs text-swiss-muted uppercase tracking-wider font-semibold">Industrial & Government Technology Transfer Projects</h4>
+                            <p class="text-xs text-swiss-muted leading-relaxed">
+                                <span class="lang-vi">Trực tiếp xây dựng mô hình toán học, tối ưu hóa giải thuật và mô phỏng hệ thống cho các dự án chuyển giao công nghệ:</span>
+                                <span class="lang-en">Formulated mathematical optimization models, designed algorithms, and simulated operations for key technology transfer projects:</span>
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 text-xs text-swiss-muted font-mono mt-2 pl-2 border-l border-swiss-border">
+                                <div><span class="text-swiss-red">•</span> Can Tho City Logistics Network (2020-2030)</div>
+                                <div><span class="text-swiss-red">•</span> Vinh Long Sweet Potato Supply Chain Design</div>
+                                <div><span class="text-swiss-red">•</span> Vo Van Kiet Traffic Intelligent Mgmt System</div>
+                                <div><span class="text-swiss-red">•</span> Nguyen Oanh 6-way Intersection Simulation</div>
+                                <div><span class="text-swiss-red">•</span> Co.opmart Distribution Center Optimization</div>
+                                <div><span class="text-swiss-red">•</span> THACO Logistics Network Infrastructure</div>
+                                <div><span class="text-swiss-red">•</span> Seaport Scheduling (Chu Lai - Truong Hai)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ACADEMIC & EDUCATION -->
+            <section id="education" class="flex flex-col gap-6">
+                <div class="border-b border-swiss-border pb-3 flex justify-between items-baseline">
+                    <h2 class="font-display text-2xl font-bold uppercase text-swiss-text tracking-tight">
+                        <span class="lang-vi">Nền Tảng Học Vấn</span>
+                        <span class="lang-en">Education</span>
+                    </h2>
+                    <span class="font-mono text-xs text-swiss-muted">[EDU_RECORD]</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                    
+                    <!-- Master -->
+                    <div class="flex flex-col gap-1 border-t border-swiss-border pt-4">
+                        <span class="font-mono text-xs text-swiss-red font-bold">12/2019</span>
+                        <h3 class="font-display text-lg font-medium text-swiss-text">Master of Science</h3>
+                        <p class="text-xs text-swiss-muted font-mono">Industrial Systems Engineering</p>
+                        <p class="text-xs text-swiss-muted mt-2 font-medium">International University - VNU HCM</p>
+                    </div>
+
+                    <!-- Bachelor -->
+                    <div class="flex flex-col gap-1 border-t border-swiss-border pt-4">
+                        <div class="flex justify-between items-baseline">
+                            <span class="font-mono text-xs text-swiss-red font-bold">10/2016</span>
+                            <span class="font-mono text-[9px] bg-swiss-red text-white px-1 py-0.5 uppercase tracking-wider font-bold">Valedictorian</span>
+                        </div>
+                        <h3 class="font-display text-lg font-medium text-swiss-text">Bachelor of Engineering</h3>
+                        <p class="text-xs text-swiss-muted font-mono">Industrial Systems Engineering</p>
+                        <p class="text-xs text-swiss-muted mt-2 font-medium">International University - VNU HCM</p>
+                        <p class="text-xxs text-swiss-red font-mono mt-1 font-bold">
+                            <span class="lang-vi">🏆 Huy chương Bạc toàn trường khóa K12</span>
+                            <span class="lang-en">🏆 University Silver Medalist (K12 Cohort)</span>
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ACADEMIC PUBLICATIONS -->
+            <section id="publications" class="flex flex-col gap-6">
+                <div class="border-b border-swiss-border pb-3 flex justify-between items-baseline">
+                    <h2 class="font-display text-2xl font-bold uppercase text-swiss-text tracking-tight">
+                        <span class="lang-vi">Nghiên Cứu Khoa Học</span>
+                        <span class="lang-en">Scientific Publications</span>
+                    </h2>
+                    <span class="font-mono text-xs text-swiss-muted">[PUB_INDEX]</span>
+                </div>
+
+                <div class="flex flex-col gap-6 font-mono text-xs mt-2">
+                    
+                    <!-- Pub 1 -->
+                    <div class="border-t border-swiss-border pt-4 flex gap-4">
+                        <span class="text-swiss-red font-display text-lg font-bold">01</span>
+                        <div>
+                            <p class="text-swiss-text font-bold leading-normal">An application of RFID for inventory management</p>
+                            <p class="text-swiss-muted text-xxs mt-1">Nguyen Hoang Son, Do Vinh Truc • The 16th Asia Pacific Industrial Engineering And Management Systems Conference (Dec 2015).</p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 2 -->
+                    <div class="border-t border-swiss-border pt-4 flex gap-4">
+                        <span class="text-swiss-red font-display text-lg font-bold">02</span>
+                        <div>
+                            <p class="text-swiss-text font-bold leading-normal">Scheduling Quay Crane and Yard Equipment: A case study of terminal in Central region</p>
+                            <p class="text-swiss-muted text-xxs mt-1">Nguyen Hoang Son, Ho Thanh Phong • The 17th Asia Pacific Industrial Engineering And Management Systems Conference (Dec 2016).</p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 3 -->
+                    <div class="border-t border-swiss-border pt-4 flex gap-4">
+                        <span class="text-swiss-red font-display text-lg font-bold">03</span>
+                        <div>
+                            <p class="text-swiss-text font-bold leading-normal">Design and Management Fruit and Vegetable Supply Chain in Mekong Delta of Vietnam: A Holistic Research</p>
+                            <p class="text-swiss-muted text-xxs mt-1">Phan Thuy Kieu, Ho Thanh Phong, Ho Thanh Vu, Nguyen Hoang Son • The 18th Asia Pacific Industrial Engineering and Management System Conference (Dec 2017) • ISBN: 978-602-50913-0-8.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 4 -->
+                    <div class="border-t border-swiss-border pt-4 flex gap-4">
+                        <span class="text-swiss-red font-display text-lg font-bold">04</span>
+                        <div>
+                            <p class="text-swiss-text font-bold leading-normal">Cell-Inspired discrete simulation applying for supply chain management</p>
+                            <p class="text-swiss-muted text-xxs mt-1">Nguyen Hoang Son, Khanh Tran Xuan, Nguyen Thao Trang, Ho Thanh Phong, Ho Doan Quoc, Nhieu Nhat Luong • International Congress on Logistics and SCM Systems (Dec 2018) • ISBN: 978-604-73-5981-3.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 5 -->
+                    <div class="border-t border-swiss-border pt-4 flex gap-4">
+                        <span class="text-swiss-red font-display text-lg font-bold">05</span>
+                        <div>
+                            <p class="text-swiss-text font-bold leading-normal">A hybrid meta-heuristics approach for supplier selection and order allocation problem for supplying risks of recyclable raw materials</p>
+                            <p class="text-swiss-muted text-xxs mt-1">Son, Nguyen & Hop, Nguyen. (2021) • International Journal of Industrial Engineering Computations • DOI: 10.5267/j.ijiec.2020.12.001.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MINIMALIST EDITORIAL FOOTER -->
+    <footer class="w-full bg-white border-t border-swiss-border py-10 px-6 font-mono text-xxs text-swiss-muted">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="lang-vi">© 2026 Nguyễn Hoàng Sơn.</span>
+                <span class="lang-en">© 2026 Nguyen Hoang Son.</span>
+            </div>
+            <div class="flex flex-wrap gap-4 md:gap-6 justify-center">
+                <a href="mailto:sonnh@iesupplychain.com" class="hover:text-swiss-red transition-colors duration-150">sonnh@iesupplychain.com</a>
+                <a href="tel:0834552286" class="hover:text-swiss-red transition-colors duration-150">0834 552 286</a>
+                <a href="https://leantoolbox.app" target="_blank" class="hover:text-swiss-red transition-colors duration-150">leantoolbox.app</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LANGUAGE HANDLER SCRIPT -->
+    <script>
+        function setLanguage(lang) {
+            // Set element language
+            document.documentElement.setAttribute('lang', lang);
+            
+            // Toggle active styling on switcher buttons
+            const btnVi = document.getElementById('btn-lang-vi');
+            const btnEn = document.getElementById('btn-lang-en');
+            
+            if (lang === 'vi') {
+                btnVi.className = "transition-colors duration-150 text-swiss-red cursor-pointer";
+                btnEn.className = "transition-colors duration-150 text-swiss-muted hover:text-swiss-text cursor-pointer";
+            } else {
+                btnEn.className = "transition-colors duration-150 text-swiss-red cursor-pointer";
+                btnVi.className = "transition-colors duration-150 text-swiss-muted hover:text-swiss-text cursor-pointer";
+            }
+            
+            // Save selection to LocalStorage for persistence
+            localStorage.setItem('cv_lang', lang);
+        }
+
+        // Initialize language from LocalStorage or default to Vietnamese
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('cv_lang') || 'vi';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+
+</html>
