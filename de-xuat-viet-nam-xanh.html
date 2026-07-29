@@ -1131,6 +1131,7 @@
                                         <li>Tích Hợp API Đơn Vị 3PL (Ahamove, Grab, Lalamove, Viettel Post): Kết nối API
                                             tự động gọi tài xế Ahamove/GrabExpress/Lalamove giao lẻ B2C tận nhà siêu
                                             tốc, tự động so sánh cước phí.</li>
+                                        <li><strong>Mobile Pick-Drop Station (Trạm Giao Nhận Di Động):</strong> Tính năng 1 xe pick tại kho biến thành trạm trung chuyển di động tại khu vực, cho phép shipper (Grab/Ahamove) tới lấy hàng giao lẻ nội vùng.</li>
                                         <li>Tracking Realtime & COD: Theo dõi vị trí tài xế, trạng thái giao nhận 5 bước
                                             và đối soát dòng tiền thu hộ COD.</li>
                                     </ul>
@@ -1738,9 +1739,8 @@
                         </tr>
                         <tr>
                             <td style="text-align: center;">8</td>
-                            <td><strong>Module 07: Smart Logistics & Delivery Dispatch</strong></td>
-                            <td>Thiết kế giao diện phân xe tải chở sỉ B2B, tích hợp API 3PL (Ahamove, Grab, Lalamove)
-                                giao lẻ B2C.</td>
+                            <td><strong>Module 07: Smart Logistics & Delivery Dispatch (Kèm Mobile Station)</strong></td>
+                            <td>Thiết kế giao diện phân xe tải chở sỉ B2B, tích hợp API 3PL (Ahamove, Grab, Lalamove) giao lẻ B2C & Tính năng xe pick tại kho biến thành Mobile Pick-Drop Station cho shipper đến lấy giao nội vùng.</td>
                             <td class="price-text">13.000.000 đ</td>
                             <td style="text-align: center; color: var(--text-muted);">-</td>
                         </tr>
@@ -2034,7 +2034,7 @@
                             style="display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">💵
                             Giá trị TB đơn hàng (AOV)</label>
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <input type="number" id="roiAov" value="2500000" min="0" step="100000"
+                            <input type="number" id="roiAov" value="1000000" min="0" step="100000"
                                 oninput="window._rcROI && window._rcROI()"
                                 style="width: 160px; padding: 8px 12px; border: 2px solid var(--border-strong); border-radius: 8px; font-size: 16px; font-weight: 700; color: var(--primary); font-family: inherit; background: #ffffff; transition: border-color 0.2s;">
                             <span style="font-size: 14px; font-weight: 600; color: var(--text-muted);">đ</span>
@@ -2046,7 +2046,7 @@
                             style="display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">📊
                             Biên lợi nhuận gộp</label>
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <input type="number" id="roiMargin" value="27" min="0" max="100" step="1"
+                            <input type="number" id="roiMargin" value="15" min="0" max="100" step="1"
                                 oninput="window._rcROI && window._rcROI()"
                                 style="width: 80px; padding: 8px 12px; border: 2px solid var(--border-strong); border-radius: 8px; font-size: 16px; font-weight: 700; color: var(--primary); font-family: inherit; background: #ffffff; transition: border-color 0.2s;">
                             <span style="font-size: 14px; font-weight: 600; color: var(--text-muted);">%</span>
@@ -2090,15 +2090,15 @@
                         </tr>
                         <tr>
                             <td>Giá trị TB đơn hàng (AOV)</td>
-                            <td style="text-align: center;">2.500.000đ</td>
-                            <td style="text-align: center;">2.500.000đ</td>
-                            <td style="text-align: center;">2.500.000đ</td>
+                            <td style="text-align: center;">1.000.000đ</td>
+                            <td style="text-align: center;">1.000.000đ</td>
+                            <td style="text-align: center;">1.000.000đ</td>
                         </tr>
                         <tr>
-                            <td>Lợi nhuận gộp / đơn (Margin 27%)</td>
-                            <td style="text-align: center;">675.000đ</td>
-                            <td style="text-align: center;">675.000đ</td>
-                            <td style="text-align: center;">675.000đ</td>
+                            <td>Lợi nhuận gộp / đơn (Margin 15%)</td>
+                            <td style="text-align: center;">150.000đ</td>
+                            <td style="text-align: center;">150.000đ</td>
+                            <td style="text-align: center;">150.000đ</td>
                         </tr>
                         <tr style="background: #f0fdf4;">
                             <td><strong>📉 HT chiếm % Doanh thu / đơn</strong></td>
@@ -2235,8 +2235,8 @@
                         function calc() {
                             var aovEl = document.getElementById('roiAov');
                             var mgEl = document.getElementById('roiMargin');
-                            var aov = aovEl ? (parseFloat(aovEl.value) || 0) : 2500000;
-                            var mg = mgEl ? (parseFloat(mgEl.value) || 0) : 27;
+                            var aov = aovEl ? (parseFloat(aovEl.value) || 0) : 1000000;
+                            var mg = mgEl ? (parseFloat(mgEl.value) || 0) : 15;
                             var lbl = document.getElementById('roiGpLbl');
                             if (lbl) lbl.textContent = 'Lợi nhuận gộp / đơn (Margin ' + mg + '%)';
 
